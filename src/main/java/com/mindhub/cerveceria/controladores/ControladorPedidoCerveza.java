@@ -290,7 +290,7 @@ public class ControladorPedidoCerveza {
         List<PedidoCervezaDTO> listaPedidoCLiente = compraActual.getPedidoCerveza().stream().map(PedidoCervezaDTO::new).toList();
         ByteArrayInputStream bis = createPdf(listaPedidoCLiente);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment; filename=ComprobanteNumero"+compraActual.getId()+".pdf");
+        headers.add("Content-Disposition", "inline; filename=theCamp.pdf");
         return ResponseEntity
                 .ok()
                 .headers(headers)

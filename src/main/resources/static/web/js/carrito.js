@@ -20,7 +20,25 @@ createApp({
         this.loadData();
     },
     methods: {
+         toast(e){
+            const Toast = Swal.mixin({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 2000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener("mouseenter", Swal.stopTimer);
+							toast.addEventListener("mouseleave", Swal.resumeTimer);
+						},
+					});
 
+                    
+					Toast.fire({
+						icon: "success",
+						title: e,
+					});
+        },
         loadData(){
             axios.get("/api/clientes/autenticado")
                 .then(response => {
@@ -42,7 +60,7 @@ createApp({
                 this.loadData()
             })
             .catch(e => {
-                alert(e.response.data)
+                 this.toast(e.response.data);
             });
         },
 
@@ -52,7 +70,9 @@ createApp({
                 this.loadData()
             })
             .catch(e => {
-                alert(e.response.data)
+
+                 this.toast(e.response.data);
+             
             });
         },
 
@@ -60,10 +80,25 @@ createApp({
             console.log(id)
             axios.delete(`/api/pedido/cancelar/${id}`)
             .then(r => {
-                alert(r.data)
+              this.toast(r.data);
                 this.loadData()
             })
             .catch(e => console.log(e));
+        },
+        downloadPDF(){
+            axios({method: 'get',
+                url: '/api/pedido/descargar-pdf',
+                responseType: 'blob',
+                headers: { 'Content-Type': 'application/json' }}).then( r =>{
+                      const url = window.URL.createObjectURL(new Blob([r.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'theCamp.pdf');
+                document.body.appendChild(link);
+                link.click();
+
+                })
+        
         },
 
         finalizarCompra(){
@@ -77,12 +112,13 @@ createApp({
     
             axios.post("/api/comprar", `numeroDeTarjeta=${this.numeroDeTarjeta}&cvv=${this.cvv}&envio=${this.envioSelecionado.toUpperCase()}&montoTotal=${this.montoTotal}`)
             .then(r => {
-                alert(r.data);
-                location.href = "/web/tienda.html";
-                // axios.get("/api/pedido/descargar-pdf")
-                // .then(r => console.log(r))
-                // .catch(e => console.log(e))
-                
+                this.toast(r.data);
+                // location.href = "/web/tienda.html";
+                this.downloadPDF();
+                setTimeout(() => {
+                    location.href = "/web/tienda.html"
+                        
+				}, 3000);
             })
             .catch(e => {
                 console.log(e);
