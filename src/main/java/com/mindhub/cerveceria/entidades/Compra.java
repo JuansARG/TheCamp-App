@@ -14,6 +14,7 @@ public final class Compra {
     private Long id;
     private Double montoTotal;
     private LocalDate fechaDeCreacion;
+    @Enumerated(EnumType.STRING)
     private EstadoCompra estado;
     private String numeroDeTarjeta;
     private Integer cvv;

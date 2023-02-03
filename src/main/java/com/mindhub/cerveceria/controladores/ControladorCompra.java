@@ -106,11 +106,20 @@ public class ControladorCompra {
 
     //TODO: AGREGAR URL AL AUTORIZATION
     @PostMapping("/comprar")
-    public ResponseEntity<?> pagar(@RequestParam String numeroDeTarjeta,
+    public ResponseEntity<?> pagar(Authentication auth,
+                                   @RequestParam String numeroDeTarjeta,
                                    @RequestParam Integer cvv,
-                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaDeVencimiento,
                                    @RequestParam EmpresaEnvio envio,
                                    @RequestParam Double montoTotal){
+
+        Cliente cliente = servicioCliente.buscarClientePorEmail(auth.getName());
+
+        if(cliente == null){
+            return new ResponseEntity<>("El cliente no esta autorizado.", HttpStatus.FORBIDDEN);
+        }
+
+        Compra compraActual =
+                cliente.getCompras().stream().filter(compra -> compra.getEstado().equals(EstadoCompra.PROGRESO)).findFirst().get();
 
         if(numeroDeTarjeta.isEmpty() || numeroDeTarjeta == null){
             return new ResponseEntity<>("Numero de tarjeta invalido", HttpStatus.FORBIDDEN);
@@ -120,9 +129,9 @@ public class ControladorCompra {
             return new ResponseEntity<>("Numero de cvv invalido", HttpStatus.FORBIDDEN);
         }
 
-        if(fechaDeVencimiento == null){
-            return new ResponseEntity<>("Fecha de vencimiento invalida", HttpStatus.FORBIDDEN);
-        }
+//        if(fechaDeVencimiento == null){
+//            return new ResponseEntity<>("Fecha de vencimiento invalida", HttpStatus.FORBIDDEN);
+//        }
 
         if(envio == null){
             return new ResponseEntity<>("Metodo de envio invalido.", HttpStatus.FORBIDDEN);
@@ -133,12 +142,20 @@ public class ControladorCompra {
         }
 
         //LLAMAR AL METODO DE LA PETICION
-        Boolean result = realizarPeticion(montoTotal, numeroDeTarjeta, cvv, fechaDeVencimiento);
+        Boolean result = realizarPeticion(montoTotal, numeroDeTarjeta, cvv);
         if(result){
+            compraActual.setEstado(EstadoCompra.CONFIRMADA);
+            compraActual.setFechaDeCreacion(LocalDate.now());
+            compraActual.setNumeroDeTarjeta(numeroDeTarjeta);
+            compraActual.setCvv(cvv);
+            compraActual.setMontoTotal(montoTotal);
+            compraActual.setEnvio(envio);
+            servicioCompra.guardarCompra(compraActual);
             return new ResponseEntity<>("PAGO APROBADO", HttpStatus.OK);
         }
-
-        return new ResponseEntity<>("SALIO TODO PA LA MIERDA", HttpStatus.CONFLICT);
+        compraActual.setEstado(EstadoCompra.RECHAZADA);
+        servicioCompra.guardarCompra(compraActual);
+        return new ResponseEntity<>("ALGO SALIO MAL", HttpStatus.CONFLICT);
 
     }
 }

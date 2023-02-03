@@ -15,8 +15,9 @@ public class Peticion {
 
     public static boolean realizarPeticion(Double montoTotal,
                                            String numeroDeTajerta,
-                                           Integer cvv,
-                                           LocalDate fechaDeVencimiento){
+                                           Integer cvv
+                                           //LocalDate fechaDeVencimiento
+                                           ){
 
         try{
 
@@ -25,7 +26,7 @@ public class Peticion {
             params.put("totalToPay", montoTotal);
             params.put("numberCard", numeroDeTajerta);
             params.put("cvv", cvv);
-            params.put("thruDate", fechaDeVencimiento);
+            //params.put("thruDate", fechaDeVencimiento);
 
             StringBuilder postData = new StringBuilder();
             for (Map.Entry<String, Object> param : params.entrySet()){

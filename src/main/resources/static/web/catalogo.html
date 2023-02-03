@@ -62,13 +62,13 @@
         </div>
     </header>
 
-    <main>
+    <main class="w-100">
         <div class="cont-main">
         <section>
         <div class="container container-cards">
             <h2 class="text-uppercase">Antares</h2>
             <ul class="cards row">
-                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img} of antares">
+                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img, index} of antares">
                     <div>
                         <h3 class="card-title">{{nombre}}</h3>
                         <div class="card-image">
@@ -80,7 +80,7 @@
 
                     </div>
                     <div class="card-link-wrapper card-btn">
-                        <a href="" class="card-link text-uppercase">Ver más</a>
+                        <a href="./login-register.html" class="card-link text-uppercase">Ver más</a>
                     </div>
                 </li>
             </ul>
@@ -91,7 +91,7 @@
         <div class="container container-cards">
             <h2 class="text-uppercase">La Paloma</h2>
             <ul class="cards row">
-                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img} of laPaloma">
+                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img, index} of laPaloma">
                     <div>
                         <h3 class="card-title">{{nombre}}</h3>
                         <div class="card-image">
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <div class="card-link-wrapper">
-                        <a href="" class="card-link text-uppercase">Ver más</a>
+                        <a href="./login-register.html" class="card-link text-uppercase">Ver más</a>
                     </div>
                 </li>
             </ul>
@@ -113,7 +113,7 @@
         <div class="container container-cards">
             <h2 class="text-uppercase">Temple</h2>
             <ul class="cards row">
-                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img} of temple">
+                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img, index} of temple">
                     <div>
                         <h3 class="card-title">{{nombre}}</h3>
                         <div class="card-image">
@@ -124,7 +124,7 @@
                         </div>
                     </div>
                     <div class="card-link-wrapper">
-                        <a href="" class="card-link text-uppercase">Ver más</a>
+                        <a href="./login-register.html" class="card-link text-uppercase">Ver más</a>
                     </div>
                 </li>
             </ul>
@@ -135,7 +135,7 @@
         <div class="container container-cards">
             <h2 class="text-uppercase">Peñón del Águila</h2>
             <ul class="cards row">
-                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img} of penonDelAguila">
+                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img, index} of penonDelAguila">
                     <div>
                         <h3 class="card-title">{{nombre}}</h3>
                         <div class="card-image">
@@ -146,7 +146,7 @@
                         </div>
                     </div>
                     <div class="card-link-wrapper">
-                        <a href="" class="card-link text-uppercase">Ver más</a>
+                        <a href="./login-register.html" class="card-link text-uppercase">Ver más</a>
                     </div>
                 </li>
             </ul>
@@ -157,7 +157,7 @@
         <div class="container container-cards">
             <h2 class="text-uppercase">Gluck</h2>
             <ul class="cards row">
-                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img} of gluck">
+                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img, index} of gluck">
                     <div>
                         <h3 class="card-title">{{nombre}}</h3>
                         <div class="card-image">
@@ -168,7 +168,7 @@
                         </div>
                     </div>
                     <div class="card-link-wrapper">
-                        <a href="" class="card-link text-uppercase">Ver más</a>
+                        <a href="./login-register.html" class="card-link text-uppercase">Ver más</a>
                     </div>
                 </li>
             </ul>
@@ -179,7 +179,7 @@
         <div class="container container-cards">
             <h2 class="text-uppercase">Imperial</h2>
             <ul class="cards row">
-                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img} of imperial">
+                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img, index} of imperial">
                     <div>
                         <h3 class="card-title">{{nombre}}</h3>
                         <div class="card-image">
@@ -190,7 +190,7 @@
                         </div>
                     </div>
                     <div class="card-link-wrapper">
-                        <a href="" class="card-link text-uppercase">Ver más</a>
+                        <a href="./login-register.html" class="card-link text-uppercase">Ver más</a>
                     </div>
                 </li>
             </ul>            
@@ -201,7 +201,7 @@
         <div class="container container-cards">
             <h2 class="text-uppercase">Quilmes</h2>
             <ul class="cards row">
-                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img} of quilmes">
+                <li class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" v-for="{nombre, descripcion, img, index} of quilmes">
                     <div>
                         <h3 class="card-title">{{nombre}}</h3>
                         <div class="card-image">
@@ -212,13 +212,15 @@
                         </div>
                     </div>
                     <div class="card-link-wrapper">
-                        <a href="" class="card-link text-uppercase">Ver más</a>
+                        <a href="./login-register.html" class="card-link text-uppercase">Ver más</a>
                     </div>
                 </li>
             </ul>
             <h4 class="mb-5">Deslizá para ver más <i class="bi bi-arrow-right-square-fill"></i></h4>
         </div>
     </section>
+
+    
 </div>
     </main>
 </div>
@@ -247,12 +249,11 @@
                 </div>        
                 <!-- Grid column Contacto-->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 contacto-columna">
-                    <h4 class="text-uppercase mb-4 font-weight-bold" style="text-shadow: black 2px 2px 2px;">Contacto</h4>
-                    <a href="https://goo.gl/maps/ishuvxPQRbcFFEyR8"><iconify-icon icon="mdi:google-maps" style="color: white;" width="20" height="20"></iconify-icon> Argentina, Río Negro, El Bolson, Av. San Martín 2760
+                    <h4 class="text-uppercase mb-4">Contacto</h4>
+                    <a href="https://goo.gl/maps/ishuvxPQRbcFFEyR8" class="enlaces"><iconify-icon icon="mdi:google-maps" style="color: white;" width="20" height="20"></iconify-icon><span class="text-light">Argentina, Río Negro, El Bolson, Av. San Martín 2760</span> 
                     </a>
-                    <a href="TheCampCervezas@gmail.com"><iconify-icon icon="fluent-emoji-high-contrast:e-mail" style="color: white;" width="20" height="20"></iconify-icon> the_CamP@gmail.com</a>
-                    <br>
-                    <a href="tel:+ 54 011 567 88"><iconify-icon icon="mdi:telephone-in-talk" style="color: white;" width="20" height="20"></iconify-icon> + 54 011 567 88</a>
+                    <a href="cerveceriathecamp@gmail.com" class="d-flex align-items-center enlaces"><iconify-icon icon="fluent-emoji-high-contrast:e-mail" style="color: white;" width="20" height="20"></iconify-icon><span class="text-light ps-1">cerveceriathecamp@gmail.com</span></a>
+                    <a href="tel:+ 54 011 567 88" class="m-0 d-flex align-items-center enlaces"><iconify-icon icon="mdi:telephone-in-talk" style="color: white;" width="20" height="20"></iconify-icon> <span class="text-light ps-1">  + 54 011 567 88 </span></a>
                 </div>
                 <!-- Grid column Redes sociales-->
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
@@ -269,12 +270,12 @@
         </div>
         <!-- Grid container -->
     
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            © 2020 Copyright:<a class="text-white">Grupo 3 - Cohort 37/38</a>
-            </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2023 Copyright:<a class="text-white">Grupo 2 - Cohort 37/38</a>
+        </div>
         </footer>
 
-
+        <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

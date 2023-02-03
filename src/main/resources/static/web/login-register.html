@@ -6,28 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/estilo/login-register.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
-    <link rel="shortcut icon" href="../Assets/Imagenes/LOGO-CERVECERIA.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/imagenes/LOGO-CERVECERIA.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>The Camp || Iniciar Sesión</title>
 </head>
 <body>
-<div id="app">
-    <main>
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a href="#">
-                <img src="./assets/imagenes/logo-nombre-largo.png" class="imagen-navbar navbar-brand"
-                    alt="Logo the camp">
-            </a>
-            <div class="container">
+<div id="app" class="p-0">
+
+      <header>
+
+        <nav class="navbar navbar-expand-xl nav-principal shadow ">
+            <div class="container-fluid">
+                <a href="#">
+                    <img src="./assets/imagenes/logo-nombre-negro.png" class="imagen-navbar navbar-brand"
+                        alt="Logo the camp">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -45,17 +43,23 @@
                         <li class="nav-item">
                             <a class="nav-link animated-line fs-5" href="./tienda.html">Tienda</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link animated-line fs-5" href="#"><iconify-icon icon="ph:user-circle"></iconify-icon></a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
-    
+    </header>
+
+    <main>
+
         <div class="section">
             <div class="container">
                 <div class="row full-height justify-content-center">
                     <div class="col-12 text-center align-self-center ">
                         <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                            <h6 class="mb-0 pb-3"><span class="login-titulo">Iniciar Sesión </span><span class="signup-titulo">Registrarme </span></h6>
+                            <h5 class="mb-0 pb-3"><span class="login-titulo">Iniciar Sesión </span><span class="signup-titulo">Registrarme </span></h5>
                                 <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
                                 <label for="reg-log"></label>
                             <div class="card-3d-wrap mx-auto">
@@ -63,7 +67,7 @@
                                     <div class="card-front">
                                         <div class="center-wrap">
                                             <div class="section text-center">
-                                                <h4 class="mb-4 pb-3 login text-dark">Iniciar Sesión</h4>
+                                                <h3 class="mb-4 pb-3 login text-dark">Iniciar Sesión</h3>
                                                 <div class="form-group">
                                                     <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off" v-model="email">
                                                     <iconify-icon icon="mdi:at" class="input-icon"></iconify-icon>
@@ -72,15 +76,14 @@
                                                     <input type="password" name="logpass" class="form-style" placeholder="Contraseña" id="logpass" autocomplete="off" v-model="password">
                                                     <iconify-icon icon="uil:padlock" class="input-icon"></iconify-icon>
                                                 </div>
-                                                <a @click="login();" class="btn mt-4 submit text-dark">Iniciar Sesión</a>
-                                                <p class="mb-0 mt-4 text-center"><a href="#0" class="link fs-6 text-dark">Olvidaste tu contraseña? </a></p>
-                                            </div>
+                                                <a @click="login();" class="btn mt-4 submit text-dark"><span class="fs-5 text-center p-auto m-auto">Iniciar Sesión</span></a>
+                                                <p class="mb-0 mt-4 text-center text-light"><a href="#" class="link fs-6 text-light">Olvidaste tu contraseña? </a></p>                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-back">
                                         <div class="center-wrap">
                                             <div class="section text-center">
-                                                <h4 class="mb-4 pb-1 login text-dark">Registrarme </h4>
+                                                <h3 class="mb-4 pb-1 login text-dark">Registrarme </h3>
                                                 <div class="form-group mb-2">
                                                     <p class="año fs-6 text-dark">Fecha de Nacimiento</p>
                                                     <input type="date" name="logedate" class="form-style" id="logdate" autocomplete="off" v-model="fechaDeNacimiento">
@@ -114,7 +117,7 @@
                                                     <input type="text" name="logcodPost" class="form-style" placeholder="Código Postal" id="logcodPost" autocomplete="off" v-model="codigoPostal">
                                                     <iconify-icon icon="gis:search-address" class="input-icon"></iconify-icon>
                                                 </div>
-                                                <a @click="registrar();" class="btn mt-4 submit">Registrarme</a>
+                                                <a @click="registrar();" class="btn mt-4 submit text-dark"><span class="fs-5 text-center p-auto m-auto">Registrarme</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -136,10 +139,10 @@
             <div class="row">
                 <!-- Grid column Horarios de Atención-->
                 <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h4 class="text-uppercase mb-4">Horarios de Atención</h4>
+                    <h4 class="text-uppercase mb-4 text-dark">Horarios de Atención</h4>
             
-                    <table class="table text-center text-white">
-                    <tbody class="font-weight-normal">
+                    <table class="table text-center text-white text-dark">
+                    <tbody class="font-weight-normal text-dark">
                         <tr>
                         <td>Lun - Vie:</td>
                         <td>09:00 - 21:00</td>
@@ -152,24 +155,34 @@
                     </table>
                 </div>        
                 <!-- Grid column Contacto-->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 contacto-columna">
-                    <h4 class="text-uppercase mb-4 font-weight-bold">Contacto</h4>
-                    <a href="https://goo.gl/maps/ishuvxPQRbcFFEyR8"><iconify-icon icon="mdi:google-maps" style="color: white;" width="20" height="20"></iconify-icon> Argentina, Río Negro, El Bolson, Av. San Martín 2760
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 contacto-columna text-dark">
+                    <h4 class="text-uppercase mb-4 font-weight-bold">Contacto
+                    </h4>
+                    <a href="https://goo.gl/maps/ishuvxPQRbcFFEyR8" class="text-dark"><iconify-icon icon="mdi:google-maps"
+                            style="color: #343A40;" width="20" height="20"></iconify-icon> Argentina, Río Negro, El
+                        Bolson, Av. San Martín 2760
                     </a>
-                    <a href="mailto:the_CamP@gmail.com"><iconify-icon icon="fluent-emoji-high-contrast:e-mail" style="color: white;" width="20" height="20"></iconify-icon> the_CamP@gmail.com</a>
-                    <br>
-                    <a href="tel:+ 54 011 567 88"><iconify-icon icon="mdi:telephone-in-talk" style="color: white;" width="20" height="20"></iconify-icon> + 54 011 567 88</a>
+                    <a href="cerveceriathecamp@gmail.com" class="text-dark"><iconify-icon icon="fluent-emoji-high-contrast:e-mail"
+                            style="color: #343A40;" width="20" height="20"></iconify-icon> cerveceriathecamp@gmail.com</a>
+                    <a href="tel:+ 54 011 567 88" class="text-dark"><iconify-icon icon="mdi:telephone-in-talk" style="color: #343A40;"
+                            width="20" height="20"></iconify-icon> + 54 011 567 88</a>
                 </div>
-                
+
                 <!-- Grid column Redes sociales-->
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 font-weight-bold">Seguinos en redes:</h5>
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-dark">Seguinos en
+                        redes:</h5>
                     <!-- Facebook -->
-                    <a class="btn btn-outline-light btn-floating m-1 botones" href="https://www.facebook.com/" role="button"><img class="LogosFooter" src="./assets/imagenes/Facebook.png" alt="Faceboock Logo"></a>
+                    <a class="btn btn-outline-light btn-floating m-1 botones bg-dark" href="https://www.facebook.com/"
+                        role="button"><img class="LogosFooter" src="./assets/imagenes/Facebook.png"
+                            alt="Facebook Logo"></a>
                     <!-- Instagram -->
-                    <a class="btn btn-outline-light btn-floating m-1 botones" href="https://www.instagram.com/" role="button"><img class="LogosFooter" src="./assets/imagenes/IG.png" alt="Instagram Logo"></a>
+                    <a class="btn btn-outline-light btn-floating m-1 botones bg-dark" href="https://www.instagram.com/"
+                        role="button"><img class="LogosFooter" src="./assets/imagenes/IG.png" alt="Instagram Logo"></a>
                     <!-- Whatsapp -->
-                    <a class="btn btn-outline-light btn-floating m-1 botones" href="https://web.whatsapp.com/" role="button"><img class="LogosFooter" src="./assets/imagenes/Whatsapp.png" alt="Whatsapp Logo"></a>
+                    <a class="btn btn-outline-light btn-floating m-1 botones bg-dark" href="https://web.whatsapp.com/"
+                        role="button"><img class="LogosFooter" src="./assets/imagenes/Whatsapp.png"
+                            alt="Whatsapp Logo"></a>
                 </div>
             </div>
             <!--Grid row-->
@@ -182,19 +195,13 @@
         </footer>
     </div>
     
-    <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script type='text/javascript' src=''></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js%27%3E'></script>
-    <script type='text/javascript'
-        src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js%27%3E'></script>
-
-
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <script src="js/login-register.js"></script>
+    <script src="./js/login-register.js"></script>
     </body>
 </html>

@@ -78,7 +78,7 @@ public class CerveceriaApplication {
 					300D,
 					"Quilmes",
 					TipoCerveza.LAGER,
-					PresentacionCerveza.LATA,
+					PresentacionCerveza.BOTELLA,
 					"/web/assets/imagenes/catalogo/quilmes-clasica-litro.png");
 			repositorioCerveza.save(quilmesRubiaBotella);
 
@@ -104,7 +104,7 @@ public class CerveceriaApplication {
 					288D,
 					"Quilmes",
 					TipoCerveza.STOUT,
-					PresentacionCerveza.LATA,
+					PresentacionCerveza.BOTELLA,
 					"/web/assets/imagenes/catalogo/quilmes-stout-botella.png");
 			repositorioCerveza.save(quilmesStoutBotella);
 
@@ -130,7 +130,7 @@ public class CerveceriaApplication {
 					288D,
 					"Quilmes",
 					TipoCerveza.STOUT,
-					PresentacionCerveza.LATA,
+					PresentacionCerveza.BOTELLA,
 					"/web/assets/imagenes/catalogo/quilmes-bock-botella.png");
 			repositorioCerveza.save(quilmesBockLitro);
 
@@ -161,7 +161,7 @@ public class CerveceriaApplication {
 					483D,
 					"Imperial",
 					TipoCerveza.STOUT,
-					PresentacionCerveza.LATA,
+					PresentacionCerveza.BOTELLA,
 					"/web/assets/imagenes/catalogo/imperial-stout-botella.png");
 			repositorioCerveza.save(imperialStoutBotella);
 
@@ -187,7 +187,7 @@ public class CerveceriaApplication {
 					490D,
 					"Imperial",
 					TipoCerveza.LAGER,
-					PresentacionCerveza.LATA,
+					PresentacionCerveza.BOTELLA,
 					"/web/assets/imagenes/catalogo/imperial-lager-botella.png");
 			repositorioCerveza.save(imperialLagerBotella);
 
@@ -214,7 +214,7 @@ public class CerveceriaApplication {
 					533D,
 					"Imperial",
 					TipoCerveza.LAGER,
-					PresentacionCerveza.LATA,
+					PresentacionCerveza.BOTELLA,
 					"/web/assets/imagenes/catalogo/imperial-roja-botella.png");
 			repositorioCerveza.save(imperialAmberLagerBotella);
 

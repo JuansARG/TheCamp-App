@@ -10,17 +10,17 @@ createApp({
             checked: [],
             cervezasFiltradas: [], //para comparar los datos
             filtroInput: '', //es para lo que ingrese el usuario
-            formato: [],
-            setFormato: [],
+            presentacion : [],
             carrito: {},
             tipos: [],
-            marca: [],
-            setMarca: [],
+            fabricantes: [],
             filtroMarca: [],
-            setTipo: [],
             productoActual: {},
             carrito : {},
             items : [],
+            checkedPresentacion : [],
+            checkedMarca : [],
+            checkedTipo : [],
         }
     },
     created(){
@@ -32,30 +32,27 @@ createApp({
             .then(response =>{
                 this.cervezas = response.data;
                 this.cervezasFiltradas = this.cervezas.map(nombreCerveza => nombreCerveza.nombre);
-                this.tipoDeCerveza = this.cervezas.map(tipo => tipo.tipoCerveza);
-                this.formato = this.cervezas.map(formato => formato.presentacion);
-                this.marca = this.cervezas.map(marca => marca.fabricante);
+
+                this.presentacion = [... new Set(this.cervezas.map(cerveza => cerveza.presentacion))];
+                console.log(this.presentacion);
+                this.tiposDeCervezas = [... new Set(this.cervezas.map(cerveza => cerveza.tipoCerveza))];
+                console.log(this.tiposDeCervezas);
+                this.fabricantes = [... new Set(this.cervezas.map(cerveza => cerveza.fabricante))];
+                console.log(this.fabricantes);
+
                 axios.get("/api/clientes/autenticado")
                 .then(response => {
                     clienteAutenticado = response.data;
                     this.carrito = clienteAutenticado.compra.filter(compra => compra.estado == "PROGRESO")[0];
-                    console.log(this.carrito);
-                    this.items = this.carrito.pedidoCerveza;
-                    console.log(this.items);
+                    if(this.carrito != undefined){
+                        this.items = this.carrito.pedidoCerveza;
+                        this.items = this.items.sort((a, b) => a.id - b.id)
+                    }
                 })
                 .catch(e => console.log(e));
-                /* this.searchbar(); */
+
             })
             .catch(error => console.error(error))
-        },
-        mostrarTipoCerveza(){
-            this.setTipo = [... new Set(this.tipoDeCerveza)];
-        },
-        mostrarPresentacion(){
-            this.setFormato = [... new Set(this.formato)];
-        },
-        mostrarFabricante(){
-            this.setMarca = [... new Set(this.marca)];
         },
         buscarCervezaIndex(index){
             this.productoActual = this.cervezasFiltradas[index]
@@ -64,92 +61,138 @@ createApp({
         peticionAumentarCantidad(id){
             axios.patch("/api/pedido/aumentar", `id=${id}`)
             .then(r => {
-                alert(r.data)
-                this.loadData()
+                const Toast = Swal.mixin({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener("mouseenter", Swal.stopTimer);
+							toast.addEventListener("mouseleave", Swal.resumeTimer);
+						},
+					});
+
+                    
+					Toast.fire({
+						icon: "success",
+						title: r.data,
+					});
+                    this.loadData()
             })
             .catch(e => console.log(e));
         },
 
         peticionDisminuirCantidad(id){
             axios.patch("/api/pedido/decrementar", `id=${id}`)
-            .then(r => {
-                alert(r.data)
+            .then(r => { const Toast = Swal.mixin({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener("mouseenter", Swal.stopTimer);
+							toast.addEventListener("mouseleave", Swal.resumeTimer);
+						},
+					});
+
+                    
+					Toast.fire({
+						icon: "success",
+						title: r.data,
+					});
                 this.loadData()
             })
             .catch(e => console.log(e));
         },
 
         borrarPedido(id){
-            console.log(id)
             axios.delete(`/api/pedido/cancelar/${id}`)
             .then(r => {
-                alert(r.data)
+                const Toast = Swal.mixin({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener("mouseenter", Swal.stopTimer);
+							toast.addEventListener("mouseleave", Swal.resumeTimer);
+						},
+					});
+
+                    
+					Toast.fire({
+						icon: "success",
+						title: r.data,
+					});
                 this.loadData()
             })
             .catch(e => console.log(e));
+        },
+
+        agregarItem(id){
+            axios.post("/api/pedido/agregar", `id=${id}`)
+            .then(r => {
+                const Toast = Swal.mixin({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener("mouseenter", Swal.stopTimer);
+							toast.addEventListener("mouseleave", Swal.resumeTimer);
+						},
+					});
+
+                    
+					Toast.fire({
+						icon: "success",
+						title: r.data,
+					});
+                this.loadData()
+            })
+            .catch(e => console.log(e));
+        },
+
+        logout(){
+            const Toast = Swal.mixin({
+				toast: true,
+				position: "top-end",
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener("mouseenter", Swal.stopTimer);
+					toast.addEventListener("mouseleave", Swal.resumeTimer);
+					},
+				});
+
+			Toast.fire({
+				icon: "success",
+				title: "Log out successfully, Redirecting",
+			});
+			setTimeout(() => {
+				axios.post("/api/logout")
+                .then(() => location.href = "/web/index.html")
+                .catch(e => console.log(e));
+				}, 3000);
         }
-/*         searchbar(){
-            this.cervezasFiltradas = this.cervezasFiltradas.toLowerCase().trim.includes(this.filtroInput.toLowerCase().trim())
-        }, */
+
     },
     computed: {
         filtro(){
-            let filtroCheckedTipo = this.cervezas.filter(cerveza => this.checked.includes(cerveza.tipoCerveza) || this.checked.length == 0);
-            
-            let filtroCheckedPresentacion = this.cervezas.filter(cerveza => this.checked.includes(cerveza.presentacion) || this.checked.length === 0)
-            
-            let filtroCheckedMarca = this.cervezas.filter(cerveza => this.checked.includes(cerveza.fabricante) || this.checked.length === 0)
-            
-            let filtroCheckedNombre = this.cervezas.filter(cerveza => this.checked.includes(cerveza.nombre) || this.checked.length === 0)
 
-            this.tipoDeCerveza = (filtroCheckedTipo
-                                    .filter(cerveza => cerveza.tipoCerveza
-                                        .toLowerCase()
-                                        .trim()
-                                        .includes(this.filtroInput.toLowerCase().trim()))) 
-            this.formato = (filtroCheckedPresentacion
-                                    .filter(cerveza => cerveza.presentacion
-                                        .toLowerCase()
-                                        .trim()
-                                        .includes(this.filtroInput.toLowerCase().trim())));
-            this.marca = (filtroCheckedMarca
-                                        .filter(cerveza => cerveza.fabricante
-                                        .toLowerCase()
-                                        .trim()
-                                        .includes(this.filtroInput.toLowerCase().trim())));
-            this.cervezasFiltradas = (filtroCheckedNombre
-                                        .filter(cerveza => cerveza.nombre
-                                        .toLowerCase()
-                                        .trim()
-                                        .includes(this.filtroInput.toLowerCase().trim()))) ;
-        },
+            let filtroCheckedTipo = this.cervezas.filter(cerveza => this.checkedTipo.includes(cerveza.tipoCerveza) || this.checkedTipo.length  == 0);
 
-        /*  filtroPresentacion(){
-            let filtroChecked = this.cervezas
-                                    .filter(cerveza => this.checked.includes(cerveza.presentacion) || this.checked.length === 0)
-            this.cervezasFiltradas = filtroChecked
-                                    .filter(cerveza => cerveza.presentacion
-                                        .toLowerCase()
-                                        .trim()
-                                        .includes(this.filtroInput.toLowerCase().trim()));
-        },
-        filtroMarca(){
-            let filtroChecked = this.cervezas
-                                    .filter(cerveza => this.checked.includes(cerveza.fabricante) || this.checked.length === 0)
-            this.cervezasFiltradas = filtroChecked
-                                    .filter(cerveza => cerveza.fabricante
-                                    .toLowerCase()
-                                    .trim()
-                                    .includes(this.filtroInput.toLowerCase().trim()));
-        },
-        filtroNombre(){
-            let filtroChecked = this.cervezas
-                                    .filter(cerveza => this.checked.includes(cerveza.nombre) || this.checked.length === 0)
-            this.cervezasFiltradas = filtroChecked
-                                    .filter(cerveza => cerveza.nombre
-                                    .toLowerCase()
-                                    .trim()
-                                    .includes(this.filtroInput.toLowerCase().trim()));
-        } */
+            let filtroCheckedMarca = filtroCheckedTipo.filter(cerveza => this.checkedMarca.includes(cerveza.fabricante) || this.checkedMarca.length  == 0);
+
+            let filtroCheckedPresentacion = filtroCheckedMarca.filter(cerveza => this.checkedPresentacion.includes(cerveza.presentacion) || this.checkedPresentacion.length  == 0);
+
+            this.cervezasFiltradas = filtroCheckedPresentacion.filter(cerveza => cerveza.nombre.toLowerCase().trim().includes(this.filtroInput.toLowerCase().trim()));
+
+        }
     }
-}).mount('#app')
+}).mount('#app');

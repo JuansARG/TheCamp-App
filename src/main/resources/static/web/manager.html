@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/imagenes/LOGO-CERVECERIA.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/estilo/manager.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <title>The Camp || Manager</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--     comienzo del navbar   -->
+        <nav class="navbar navbar-expand-xl nav-principal shadow ">
+            <div class="container-fluid">
+                <a href="#">
+                    <img src="assets/imagenes/logo-navbar-admin.png" class="imagen-navbar navbar-brand"
+                        alt="Logo the camp">
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link animated-line fs-5 ancor-cerrar-sesion" @click="logout();">
+                                Cerrar sesión
+                                <i class="bi bi-box-arrow-right ms-2 mb-2"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--       fin del navbar      -->
+
+        <!--    Comienzo de main     -->
+        <div>
+            <main class="contenedor-padre">
+                <div class="contenedor-añadir-borrar-cambiar">
+                    <!-- Button trigger modal -->
+                    <div class="contenedor-boton-texto w-100 d-flex justify-content-center p-4">
+                        <p class="agregar-cerveza">Agregar Cerveza</p>
+                        <button type="button" class="btn btn-primary boton-agregar-cliente" data-bs-toggle="modal"
+                            data-bs-target="#agregarCerveza" @click="agregarCerveza();">
+                            <iconify-icon icon="ic:baseline-plus"></iconify-icon>
+                        </button>
+                    </div>
+                    <div class="contenedor-tabla-cervezas">
+                        <table class="table table-striped p-3 w-70 table-responsive">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">ABV%</th>
+                                    <th scope="col">IBU</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Marca</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Formato</th>
+                                    <th scope="col">Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for=" {id, abv, descripcion, fabricante, ibu, nombre, precio, presentacion, stock, tipoCerveza } in productos">
+                                    <td scope="row">{{nombre}}</td>
+                                    <td scope="row">{{abv}}</td>
+                                    <td scope="row">{{ibu}}</td>
+                                    <td scope="row">{{tipoCerveza}}</td>
+                                    <td scope="row">{{fabricante}}</td>
+                                    <td scope="row">{{stock}}
+                                        <button type="button" class="btn m-2 p-2 btn-secondary"
+                                            @click="modificarStock(id);" data-bs-toggle="modal"
+                                            data-bs-target="#modificarStock"> <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                    </td>
+                                    <td scope="row">{{presentacion}}</td>
+                                    <td scope="row">{{precio}}</td>
+                                    <td>
+                                        <button type="button" class="btn m-2 p-2 btn-secondary"
+                                            @click="modificarCerveza(id);" data-bs-toggle="modal"
+                                            data-bs-target="#agregarCerveza"><i class="bi bi-pencil-square"></i>
+                                        </button>
+                                    </td>
+                                    <td scope="row">
+                                        <button class="btn m-2 p-2 btn-danger" @click="borrarCerveza(id)">
+                                            <i class="bi bi-trash3-fill"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <!-- Modal modificar cerveza-->
+                    <div class="modal fade" id="agregarCerveza" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Modificar cerveza</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="nombreNuevo" class="form-label">Nombre:</label>
+                                            <input v-model="nombreNuevo" class="form-control" type="text"
+                                                placeholder="Nombre del producto">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="descripcionNuevo" class="form-label">Descripción:</label>
+                                            <textarea v-model="descripcionNuevo" class="form-control" type="text"
+                                                placeholder="Descripción"></textarea> 
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="abvNuevo" class="form-label">ABV:</label>
+                                            <input v-model="abvNuevo" class="form-control" type="number" placeholder="ABV">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="ibuNuevo" class="form-label">IBU:</label>
+                                            <input v-model="ibuNuevo" class="form-control" type="number" placeholder="IBU">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="fabricanteNuevo" class="form-label">Seleccionar fabricante:</label>
+                                            <select class="form-select" aria-label="Default select example" v-model="fabricanteNuevo">
+                                                <option disable>Seleccionar fabricante</option>
+                                                
+                                                <template v-for="fabrica of fabricantes">
+                                                    <option :value="fabrica">{{fabrica}}</option>
+                                                </template>
+                                                
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="linkImagen" class="form-label">Imagen:</label>
+                                            <input v-model="linkImagenNuevo" class="form-control" type="text" placeholder="Link de imagen">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="stockNuevo" class="form-label">Stock:</label>
+                                            <input v-model="stockNuevo" class="form-control" type="number " placeholder="Stock">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="precioNuevo" class="form-label">Precio:</label>
+                                            <input v-model="precioNuevo" class="form-control" type="money " placeholder="Precio">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tipoNuevo" class="form-label">Seleccionar tipo:</label>
+                                            <select class="form-select" aria-label="Default select example" v-model="tipoNuevo">
+                                                <option selected>Seleccionar tipo:</option>
+                                                <template v-for="tipo of tipos">
+                                                <option :value="tipo">{{tipo}}</option>
+                                                </template>
+                                            </select>
+                                        </div>
+                                    </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-success" @click="confirmarAgregarCerveza();">Añadir producto</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- fin modal modificar cerveza -->
+                <!-- inicio modal modificar stock -->
+                <div class="modal fade" id="modificarStock" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Modificar stock</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h2>{{nombreNuevo}}</h2>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="stockNuevo" class="form-label">Stock:</label>
+                                    <input v-model="stockNuevo" class="form-control" type="number" placeholder="Stock">
+                                </div>
+                            </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" @click="confirmarModificarStock();">Modificar stock</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <!-- fin modal modificar Stock -->
+            </div>
+        </main>
+    </div>
+</div>
+
+
+    <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="js/manager.js"></script>
+</body>
+
+</html>

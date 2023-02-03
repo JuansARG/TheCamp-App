@@ -115,6 +115,7 @@ main {
     text-align: left;
     background-color: #FFBF67 !important;
     margin-right: 20px;
+    margin-top: 2rem!important;
 }
 
 .titulo-tienda {
@@ -291,6 +292,9 @@ main {
     background-color: #FFEED6;
 
 }
+.pointer{
+cursor: pointer !important;
+}
 .info-card:hover{
     transition: all 0.7s ease-in-out;
     display: block !important;
@@ -340,8 +344,6 @@ a {
 }
 .modal-content{
     background-color: #FFEED6 !important;
-    /* box-shadow: 0 2px 4px 0 rgba(0,0,0,.2) !important;
-    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2); */
 }
 /*media query cards*/
 

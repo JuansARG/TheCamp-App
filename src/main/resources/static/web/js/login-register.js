@@ -26,8 +26,24 @@ createApp({
                 alert("Password invalido!");
                 this.resetearCampos();
             }else{
+                
                 axios.post("/api/login", `email=${this.email}&password=${this.password}`)
-                .then(() => location.href = "/web/tienda.html")
+                .then(e =>{
+                    const Toast = Swal.mixin({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true
+					});
+
+					Toast.fire({
+						icon: "success",
+						title: "Sesión iniciada correctamente",
+					});
+					setTimeout(() => {   location.href = "/web/tienda.html"
+					}, 3000)
+                }) 
                 .catch( e => console.log(e));
             }
         },
@@ -61,10 +77,30 @@ createApp({
                 this.formatearFechaDeNacimiento();
                 axios.post("/api/clientes/crear", 
                 `email=${this.email}&nombre=${this.nombre}&apellido=${this.apellido}&password=${this.password}&fechaDeNacimiento=${this.fechaDeNacimiento}&ciudad=${this.ciudad}&pais=${this.pais}&cp=${this.codigoPostal}`)
-                .then(() => {
-                    this.login();
+                .then(r => {
+                    const Toast = Swal.mixin({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener("mouseenter", Swal.stopTimer);
+							toast.addEventListener("mouseleave", Swal.resumeTimer);
+						},
+					});
+					Toast.fire({
+						icon: "success",
+						title: r.data,
+					});
+
+					setTimeout(() => {
+						this.login();
+					}, 3000);
                 })
-                .catch(e => alert(e));
+                .catch(e => {
+                    alert(e.response.data)
+                });
             }
 
             

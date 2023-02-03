@@ -40,21 +40,7 @@ createApp({
                 console.log(this.quilmes)
                 console.log(this.penonDelAguila);
             })
-/*             .then((response) =>{
-                this.json = response.data.data;
-                this.antares = this.json.filter(cerveza => cerveza.fabricante === "Antares");
-                this.laPaloma = this.json.filter(cerveza => cerveza.fabricante === "La Paloma");
-                this.gluck = this.json.filter(cerveza => cerveza.fabricante === "Gluck");
-                this.imperial = this.json.filter(cerveza => cerveza.fabricante === "Imperial");
-                this.quilmes = this.json.filter(cerveza => cerveza.fabricante === "Quilmes");
-                console.log(response.data.data)
-                console.log(this.json)
-                console.log(this.antares)
-                console.log(this.laPaloma)
-                console.log(this.gluck)
-                console.log(this.imperial)
-                console.log(this.quilmes)
-            }) */
+
             .catch((error => console.log(error)));
         }
     },
